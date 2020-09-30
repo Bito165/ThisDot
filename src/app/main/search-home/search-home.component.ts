@@ -84,7 +84,7 @@ export class SearchHomeComponent implements OnInit {
   }
 
   checkCount(){
-    if(this.totalCount == 0){
+    if(this.totalCount == 0 || this.searchResults.length == 0){
       this.noResults = true;
     }else{
       this.noResults = false;
