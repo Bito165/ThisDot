@@ -1,0 +1,19 @@
+<div class="card animate__fadeInRight animate__animated hover-shadow-lg hover-translate-y-n10 my-2">
+    <div class="card-body text-center">
+      <div class="avatar-parent-child">
+        <a [href]="user.profile" class="avatar avatar-lg rounded-circle">
+          <img class="img-fluid" alt="Image placeholder" [src]="user.avatar">
+        </a>
+        <span class="avatar-child avatar-badge bg-info"></span>
+      </div>
+      <h5 class="mt-3 mb-0">{{user.username | titlecase}}</h5>
+    </div>
+   
+    <div class="card-footer">
+      <div class="actions d-flex justify-content-center">
+        <a [href]="user.profile" class="action-item">
+          <span class="btn-inner--icon">View Profile</span>
+        </a>
+      </div>
+    </div>
+  </div>

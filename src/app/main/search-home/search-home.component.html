@@ -1,0 +1,40 @@
+<div class="container">
+    <div class="row animate__slideInDown animate__animated">
+        <div class="col-md-6 col-sm-12 offset-md-3">
+            <form (submit)="searchUsers(searchForm)" class="form-signin" #searchForm="ngForm" ngNativeValidate>
+                <img class="mb-4" src="assets/images/github-logo.png" alt="" width="70" height="70">
+                <h1 class="h3 mb-3 font-weight-normal">GitHub Search</h1>
+                <label for="inputText" class="sr-only">Enter Search Parameter</label>
+                <input type="text" ngModel name="parameter" id="inputText" class="form-control" placeholder="Enter Search Parameter" required autofocus>
+                <label for="inputText" class="my-1 text-left text-danger" *ngIf="searchForm && searchForm.controls['parameter'] && searchForm.controls['parameter'].dirty && searchForm.controls['parameter'].invalid"> Please Enter A Search Parameter </label>
+                <button [disabled]="searchForm.invalid" class="btn animate__animated bounce btn-lg btn-primary btn-block my-3" type="submit">Search</button>    
+            </form>
+        </div>
+    </div>
+    <div *ngIf="searched" class="row my-2">
+        <div *ngIf="!noResults" class="col-12 text-left"> 
+            <h3 class="text-underlined"> Search Results For <i>{{query}}({{totalCount | number}})</i> </h3> 
+        </div>
+        <div *ngIf="noResults" class="col-12"> 
+            <img src="assets/svg/inbox-zero.svg" alt="" srcset="">
+            <h5 class="text-danger"> Your Search Returned No Results </h5>
+        </div>
+        <div *ngFor="let user of searchResults" class="col-md-3 col-sm-12">
+            <app-user-card [user]="user"></app-user-card>
+        </div>
+        <div *ngIf="!noResults" class="col-12">
+            <div class="float-lg-right">
+                Page Size : 
+                <select name="pageSize" (change)="getUsers();" [(ngModel)]="pageSize">
+                    <option value="4"> 4 </option>
+                    <option value="8"> 8 </option>
+                    <option value="12"> 12 </option>
+                </select>
+                Total Count: {{totalCount | number}} | Showing {{ minimum | number }} - {{ maximum | number }} | 
+                <button (click)="previous()" [disabled]="previousCheck" type="button" class="btn btn-info">Previous</button>
+                <button (click)="next()" [disabled]="nextCheck" type="button" class="btn btn-info ml-3">Next</button>
+            </div>
+        </div>
+    </div>
+
+</div>
